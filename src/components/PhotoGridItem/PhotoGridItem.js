@@ -1,11 +1,27 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
+const generateSrcSet = (imageFilename) => {
+  const extensions = {
+    '.avif': '1x',
+    '.jpeg': '1x',
+    '@2x.avif': '2x',
+    '@2x.jpg': '2x',
+    '@3x.avif': '3x',
+    '@3x.jpg': '3x',
+  };
+  const nameWithoutExtension = imageFilename.split('.')[0];
+  const srcSet = Object.keys(extensions).map(
+    (ext) => `${nameWithoutExtension}${ext} ${extensions[ext]}`
+  );
+  return srcSet.join(', ');
+};
+
 const PhotoGridItem = ({ id, src, alt, tags }) => {
   return (
     <article>
       <Anchor href={`/photos/${id}`}>
-        <Image src={src} />
+        <Image src={src} srcSet={generateSrcSet(src)} />
       </Anchor>
       <Tags>
         {tags.map((tag) => (

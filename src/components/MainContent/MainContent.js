@@ -13,13 +13,7 @@ const MainContent = () => {
         <h1>All Photos</h1>
       </VisuallyHidden>
       {data.map(({ id, src, alt, tags }) => (
-        <PhotoGridItem
-          key={id}
-          id={id}
-          src={src}
-          alt={alt}
-          tags={tags}
-        />
+        <PhotoGridItem key={id} id={id} src={src} alt={alt} tags={tags} />
       ))}
     </Wrapper>
   );
